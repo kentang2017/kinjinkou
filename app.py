@@ -112,7 +112,7 @@ with pan:
 
         # 顯示日期與干支資訊
         info_text = ""
-        #info_text += "日期︰{}年{}月{}日{}時{}分\n".format(y, m, d, h, mi)
+        info_text += "日期︰{}年{}月{}日{}時{}分\n".format(y, m, d, h, mi)
         info_text += "農曆︰{}年{}{}日\n".format(lunar_year_to_chinese(lunar["年"]), lunar["農曆月"], lunar_day_to_chinese(lunar["日"]))
         info_text += "節氣︰{}\n".format(jieqi_name)
         #info_text += "干支︰{}年 {}月 {}日 {}時 {}分\n".format(
