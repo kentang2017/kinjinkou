@@ -117,7 +117,7 @@ with pan:
         info_text += "節氣︰{}\n".format(jieqi_name)
         #info_text += "干支︰{}年 {}月 {}日 {}時 {}分\n".format(
         #    qgz[0], qgz[1], qgz[2], qgz[3], qgz[4])
-        info_text += "地分︰{}\n".format(difen)
+        #info_text += "地分︰{}\n".format(difen)
 
         st.subheader("📅 金口訣排盤結果")
         output1 = st.empty()
