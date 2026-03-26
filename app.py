@@ -128,7 +128,13 @@ with pan:
         st.subheader("🧮 金口訣排盤結果")
         output2 = st.empty()
         with st_capture(output2.code):
-            print(api.print_pan())
+            pan_result = api.print_pan()
+            # 不顯示天盤、地盤、神盤
+            pan_result = '\n'.join(
+                line for line in pan_result.splitlines()
+                if not line.startswith(('地盘：', '天盘：', '神盘：'))
+            )
+            print(pan_result)
 
         # 原始資料
         expander = st.expander("原始資料")
@@ -156,7 +162,6 @@ with readme_tab:
 - **金口訣排盤**：根據干支和地分進行完整的金口訣起課計算
 
 #### 排盤結果包括
-- 地盤、天盤、神盤
 - 月將
 - 四課：人元、貴神、將神、地分
 - 五行、陰陽、旺衰、用神分析
