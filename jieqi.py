@@ -46,9 +46,9 @@ def get_jieqi_start_date(year, month, day, hour, minute):
         t = sxtwl.JD2DD(jd)
         return {
             "年": t.Y, "月": t.M, "日": t.D,
-            "時": int(t.h), "分": round(t.m),
+            "時": int(t.h), "分": min(round(t.m), 59),
             "節氣": jqmc[jq_index - 1],
-            "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), round(t.m))
+            "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), min(round(t.m), 59))
         }
     else:
         current_day = d
@@ -60,9 +60,9 @@ def get_jieqi_start_date(year, month, day, hour, minute):
                 t = sxtwl.JD2DD(jd)
                 return {
                     "年": t.Y, "月": t.M, "日": t.D,
-                    "時": int(t.h), "分": round(t.m),
+                    "時": int(t.h), "分": min(round(t.m), 59),
                     "節氣": jqmc[jq_index - 1],
-                    "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), round(t.m))
+                    "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), min(round(t.m), 59))
                 }
 
 
@@ -76,9 +76,9 @@ def get_before_jieqi_start_date(year, month, day, hour, minute):
             t = sxtwl.JD2DD(jd)
             return {
                 "年": t.Y, "月": t.M, "日": t.D,
-                "時": int(t.h), "分": round(t.m),
+                "時": int(t.h), "分": min(round(t.m), 59),
                 "節氣": jqmc[jq_index - 1],
-                "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), round(t.m))
+                "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), min(round(t.m), 59))
             }
         current_day = current_day.before(1)
 
@@ -93,9 +93,9 @@ def get_next_jieqi_start_date(year, month, day, hour, minute):
             t = sxtwl.JD2DD(jd)
             return {
                 "年": t.Y, "月": t.M, "日": t.D,
-                "時": int(t.h), "分": round(t.m),
+                "時": int(t.h), "分": min(round(t.m), 59),
                 "節氣": jqmc[jq_index - 1],
-                "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), round(t.m))
+                "時間": datetime.datetime(t.Y, t.M, t.D, int(t.h), min(round(t.m), 59))
             }
         current_day = current_day.after(1)
 
@@ -200,6 +200,7 @@ def gangzhi1(year, month, day, hour, minute):
     mTG = "{}{}".format(tian_gan[cdate.getMonthGZ().tg], di_zhi[cdate.getMonthGZ().dz])
     dTG = "{}{}".format(tian_gan[cdate.getDayGZ().tg], di_zhi[cdate.getDayGZ().dz])
     hTG = "{}{}".format(tian_gan[cdate.getHourGZ(dd[3]).tg], di_zhi[cdate.getHourGZ(dd[3]).dz])
+    # sxtwl 的 getMonthGZ() 在 1900 年以前不準確，改用五虎遁從年干推算月干支
     if year < 1900:
         mTG1 = find_lunar_month(yTG).get(lunar_date_d(year, month, day).get("月"))
     else:
@@ -224,6 +225,7 @@ def gangzhi(year, month, day, hour, minute):
     mTG = "{}{}".format(tian_gan[cdate.getMonthGZ().tg], di_zhi[cdate.getMonthGZ().dz])
     dTG = "{}{}".format(tian_gan[cdate.getDayGZ().tg], di_zhi[cdate.getDayGZ().dz])
     hTG = "{}{}".format(tian_gan[cdate.getHourGZ(dd[3]).tg], di_zhi[cdate.getHourGZ(dd[3]).dz])
+    # sxtwl 的 getMonthGZ() 在 1900 年以前不準確，改用五虎遁從年干推算月干支
     if year < 1900:
         mTG1 = find_lunar_month(yTG).get(lunar_date_d(year, month, day).get("月"))
     else:
