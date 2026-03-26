@@ -8,7 +8,7 @@ import streamlit as st
 import pendulum as pdlm
 from contextlib import contextmanager, redirect_stdout
 from io import StringIO
-from kinjinkou import Paipan
+from kinjinkou import JinkoujueApi
 from jieqi import gangzhi, jq, lunar_date_d
 
 
@@ -105,18 +105,10 @@ with pan:
         # 計算農曆
         lunar = lunar_date_d(y, m, d)
 
-        # 構建干支字典
-        ganzhi_dict = {
-            '年柱': qgz[0],
-            '月柱': qgz[1],
-            '日柱': qgz[2],
-            '时柱': qgz[3],
-            '文本': '{}年 {}月 {}日 {}時'.format(qgz[0], qgz[1], qgz[2], qgz[3])
-        }
-
-        # 排盤
-        pp = Paipan()
-        pp.paipan(ganzhi_dict, difen, yuejiang=None, zhanshi=None)
+        # 使用 JinkoujueApi 排盤
+        dt = pdlm.datetime(y, m, d, h, mi, tz='Asia/Hong_Kong')
+        api = JinkoujueApi()
+        api.paipan(dt, difen=difen)
 
         # 顯示日期與干支資訊
         info_text = ""
@@ -136,11 +128,11 @@ with pan:
         st.subheader("🧮 金口訣排盤結果")
         output2 = st.empty()
         with st_capture(output2.code):
-            print(pp.output())
+            print(api.print_pan())
 
         # 原始資料
         expander = st.expander("原始資料")
-        expander.write(str(pp.Res))
+        expander.write(str(api.P.Res))
 
     except Exception as e:
         st.error(f"排盤計算出錯：{str(e)}")

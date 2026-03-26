@@ -111,10 +111,9 @@ class JinkoujueApi:
         self.lianghuafenxi = None
 
     def paipan(self, datetime_obj, difen='子', yuejiang=None, zhanshi=None):
-        #a = WannianliApi()
         self.P = Paipan()
         calendar = gangzhi1(datetime_obj.year, datetime_obj.month, datetime_obj.day, datetime_obj.hour, datetime_obj.minute)
-        self.pan = self.P.paipan(calendar, difen=difen, yuejiang=yuejiang, zhanshi=zhanshi)
+        self.pan, self.ganzhi = self.P.paipan(calendar, difen=difen, yuejiang=yuejiang, zhanshi=zhanshi)
         return self.pan
 
     def print_pan(self):
