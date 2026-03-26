@@ -95,7 +95,7 @@ with st.sidebar:
     st.caption("時區: Asia/Hong_Kong")
 
 with pan:
-    st.header('堅金口 - 金口訣排盤')
+    st.header('堅金口 - 金口排盤')
 
     try:
         # 計算干支
@@ -119,7 +119,6 @@ with pan:
         #    qgz[0], qgz[1], qgz[2], qgz[3], qgz[4])
         #info_text += "地分︰{}\n".format(difen)
 
-        st.subheader("📅 金口訣排盤結果")
         output1 = st.empty()
         with st_capture(output1.code):
             print(info_text)
