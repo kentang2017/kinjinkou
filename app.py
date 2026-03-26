@@ -8,7 +8,7 @@ import streamlit as st
 import pendulum as pdlm
 from contextlib import contextmanager, redirect_stdout
 from io import StringIO
-from yxf_yixue import Paipan
+from kinjinkou import Paipan
 from jieqi import gangzhi, jq, lunar_date_d
 
 
