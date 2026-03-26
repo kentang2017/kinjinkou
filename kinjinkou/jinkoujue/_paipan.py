@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from yxf_yixue.utils import Db, Db2Cdata
+from kinjinkou.utils import Db, Db2Cdata
 
 
 class Paipan:

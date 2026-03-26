@@ -8,7 +8,7 @@
     python run_paipan.py
 """
 
-from yxf_yixue import Paipan
+from kinjinkou import Paipan
 
 
 def main():
