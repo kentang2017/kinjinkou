@@ -117,6 +117,30 @@ def jq(year, month, day, hour, minute):
 
 
 # 農曆
+def lunar_year_to_chinese(year):
+    """將農曆年份數字轉換為中文數字表示，例如 2024 → 二〇二四"""
+    digit_map = {'0': '〇', '1': '一', '2': '二', '3': '三', '4': '四',
+                 '5': '五', '6': '六', '7': '七', '8': '八', '9': '九'}
+    return ''.join(digit_map[d] for d in str(year))
+
+
+def lunar_day_to_chinese(day):
+    """將農曆日期數字轉換為傳統中文表示，例如 1→初一, 15→十五, 21→廿一, 30→三十"""
+    units = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
+    if 1 <= day <= 10:
+        return '初' + units[day]
+    elif 11 <= day <= 19:
+        return '十' + units[day - 10]
+    elif day == 20:
+        return '二十'
+    elif 21 <= day <= 29:
+        return '廿' + units[day - 20]
+    elif day == 30:
+        return '三十'
+    else:
+        return str(day)
+
+
 def lunar_date_d(year, month, day):
     lunar_m = ['占位', '正月', '二月', '三月', '四月', '五月', '六月',
                '七月', '八月', '九月', '十月', '冬月', '腊月']
